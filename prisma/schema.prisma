@@ -1,0 +1,26 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Language {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  generations Generation[]
+}
+
+model Generation {
+  id          Int       @id @default(autoincrement())
+  prompt      String
+  code        String
+  createdAt   DateTime  @default(now())
+  starred     Boolean   @default(false)
+  languageId  Int
+  language    Language  @relation(fields: [languageId], references: [id])
+}
+
