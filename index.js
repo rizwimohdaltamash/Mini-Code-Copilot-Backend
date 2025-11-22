@@ -10,6 +10,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// GET /
+app.get("/", (req, res) => {
+    res.send("Mini Code Copilot Backend is Running!");
+});
+
 // POST /api/generate
 app.post("/api/generate", async (req, res) => {
     try {
